@@ -4,6 +4,7 @@ const  express  =  require('express');
 const  bodyParser  =  require('body-parser');
 const  morgan  =  require('morgan');
 const  app  =  express();
+const connection = require('./helpers/db.js');
 
 const authRouter = require('./routes/auth/auth');
 
