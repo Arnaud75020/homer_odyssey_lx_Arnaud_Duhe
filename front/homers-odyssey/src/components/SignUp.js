@@ -6,7 +6,7 @@ class SignUp extends React.Component {
             this.state = { 
                 email: "",
                 password: "",
-                passwordbis: "",
+                //passwordbis: "",
                 name: "",
                 lastname: "", 
                 flash: ""
@@ -24,6 +24,9 @@ class SignUp extends React.Component {
      }
 
      handleSubmit(event) {
+
+        const { flash, ...user } = this.state
+
          event.preventDefault();
          fetch("/auth/signup",
          {
@@ -31,7 +34,7 @@ class SignUp extends React.Component {
              headers:  new  Headers({
                  'Content-Type':  'application/json'
              }),
-             body:  JSON.stringify(this.state),
+             body:  JSON.stringify(user),
          })
          .then(res  =>  res.json())
          .then(
@@ -44,12 +47,12 @@ class SignUp extends React.Component {
         return ( 
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <h1>{JSON.stringify(this.state)}</h1>
-                    <input type="email" name="email" onChange={this.handleChange}/>
-                    <input type="text" name="password" onChange={this.handleChange}/>
-                    <input type="text" name="passwordbis" onChange={this.handleChange}/>
-                    <input type="text" name="name" onChange={this.handleChange}/>
-                    <input type="text" name="lastname" onChange={this.handleChange}/>
+                    <h1>{this.state.flash}</h1>                    
+                    <input type="email" name="email" onChange={this.handleChange} placeholder="email"/>
+                    <input type="text" name="password" onChange={this.handleChange}placeholder="password"/>
+                    {/*<input type="text" name="passwordbis" onChange={this.handleChange} placeholder="passwordbis"/>*/}
+                    <input type="text" name="name" onChange={this.handleChange} placeholder="name"/>
+                    <input type="text" name="lastname" onChange={this.handleChange}placeholder="lastname"/>
                     <input type="submit" value="Submit" /> 
                 </form>
             </div>
